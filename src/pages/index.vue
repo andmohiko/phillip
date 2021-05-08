@@ -1,41 +1,38 @@
 <template>
   <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        phillip
-      </h1>
-      <h2 class="subtitle">
-        url bookmark collection
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+    <div class="add-tag">
+      <p class="text-xl text-gray-700 pb-2">新しくタグを追加</p>
+      <TextField
+        ref="tag"
+        label="タグ"
+        placeholder="デザイン"
+      />
+      <Button @onClick="addTag" label="タグを追加" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-
-import Logo from '@/components/Logo.vue'
+import Button from '@/components/parts/Button.vue'
+import TextField from '@/components/input/TextField.vue'
 
 export default Vue.extend({
   components: {
-    Logo
+    Button,
+    TextField
+  },
+  data() {
+    return {
+      url: 'www.google.com'
+    }
+  },
+  methods: {
+    addTag() {
+      const tagRef: any = this.$refs.tag
+      const tag: string = tagRef.get()
+      console.log(tag)
+    }
   }
 })
 </script>
@@ -48,6 +45,7 @@ export default Vue.extend({
   justify-content: center;
   align-items: center;
   text-align: center;
+  flex-direction: column;
 }
 
 .title {
