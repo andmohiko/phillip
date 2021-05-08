@@ -11,8 +11,8 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/pwa": "^3.0.0-0",
-    "dotenv": "^9.0.0",
     "firebase": "^8.5.0",
     "nuxt": "^2.0.0"
   },
