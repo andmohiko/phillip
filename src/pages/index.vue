@@ -28,22 +28,19 @@
   </div>
 </template>
 
-<script>
-import Logo from '~/components/Logo.vue'
+<script lang="ts">
+import Vue from 'vue'
 
-export default {
+import Logo from '@/components/Logo.vue'
+
+export default Vue.extend({
   components: {
     Logo
   }
-}
+})
 </script>
 
 <style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-  @apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
 .container {
   margin: 0 auto;
   min-height: 100vh;
