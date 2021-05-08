@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1 class="text-2xl text-gray-700 pb-4">ほしの本棚</h1>
+    <AddBookmark />
     <AddTag />
   </div>
 </template>
@@ -8,10 +9,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import AddTag from '@/components/input/AddTag.vue'
+import AddBookmark from '@/components/input/AddBookmark.vue'
 
 export default Vue.extend({
   components: {
-    AddTag
+    AddTag,
+    AddBookmark
   },
   methods: {
   }

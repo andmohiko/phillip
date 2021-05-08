@@ -1,5 +1,5 @@
 <template>
-  <div class="add-tag">
+  <div class="add-tag pb-6">
     <p class="text-xl text-gray-700 pb-2">新しくタグを追加</p>
     <TextField
       ref="tagLabel"
