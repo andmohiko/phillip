@@ -1,38 +1,19 @@
 <template>
   <div class="container">
-    <div class="add-tag">
-      <p class="text-xl text-gray-700 pb-2">新しくタグを追加</p>
-      <TextField
-        ref="tag"
-        label="タグ"
-        placeholder="デザイン"
-      />
-      <Button @onClick="addTag" label="タグを追加" />
-    </div>
+    <h1 class="text-2xl text-gray-700 pb-4">ほしの本棚</h1>
+    <AddTag />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import Button from '@/components/parts/Button.vue'
-import TextField from '@/components/input/TextField.vue'
+import AddTag from '@/components/input/AddTag.vue'
 
 export default Vue.extend({
   components: {
-    Button,
-    TextField
-  },
-  data() {
-    return {
-      url: 'www.google.com'
-    }
+    AddTag
   },
   methods: {
-    addTag() {
-      const tagRef: any = this.$refs.tag
-      const tag: string = tagRef.get()
-      console.log(tag)
-    }
   }
 })
 </script>

@@ -1,7 +1,12 @@
+require('dotenv').config()
+const config = process.env
 
 export default {
   mode: 'spa',
   srcDir: 'src',
+  env: {
+    ...config
+  },
   /*
   ** Headers of the page
   */
@@ -29,6 +34,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/firebase',
   ],
   /*
   ** Nuxt.js dev-modules
