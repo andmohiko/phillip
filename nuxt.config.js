@@ -36,6 +36,7 @@ export default {
   buildModules: [
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxt/typescript-build'
   ],
   /*
   ** Nuxt.js modules
@@ -50,6 +51,9 @@ export default {
     /*
     ** You can extend webpack config here
     */
+    babel: {
+      plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],
+    },
     extend (config, ctx) {
     }
   }
