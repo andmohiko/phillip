@@ -49,7 +49,7 @@ export default Vue.extend({
       })
     },
     get(): Label[] {
-      return this.tags.filter((tag, i: number) => this.isSelectedArray[i])
+      return this.tags.filter((tag: Label, i: number) => this.isSelectedArray[i])
     }
   }
 })
