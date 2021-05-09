@@ -1,7 +1,11 @@
 <template>
   <div class="container">
     <h1 class="text-2xl text-gray-700 pb-4">ほしの本棚</h1>
+    <div v-show="!isLogin" class="goole-login">
+      <Button @onClick="login" label="googleでログイン" />
+    </div>
     <AddBookmark />
+    <TagsSelecter />
     <AddTag />
   </div>
 </template>
@@ -10,13 +14,25 @@
 import Vue from 'vue'
 import AddTag from '@/components/input/AddTag.vue'
 import AddBookmark from '@/components/input/AddBookmark.vue'
+import Button from '@/components/parts/Button.vue'
+import TagsSelecter from '@/components/parts/TagsSelecter.vue'
 
 export default Vue.extend({
   components: {
     AddTag,
-    AddBookmark
+    AddBookmark,
+    Button,
+    TagsSelecter
+  },
+  computed: {
+    isLogin() {
+      return this.$store.state.isLogin
+    }
   },
   methods: {
+    login() {
+      this.$store.dispatch("loginGoogle")
+    },
   }
 })
 </script>
