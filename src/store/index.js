@@ -1,5 +1,6 @@
 import firebase from '@/plugins/firebase'
 import { serverTimestamp } from '@/plugins/firebase'
+import { date2string } from '@/utils/date.js'
 
 const db = firebase.firestore()
 // import "firebase/auth"
@@ -70,6 +71,23 @@ const actions = {
       ...user
     })
   },
+  async getBookmarks({ commit }, userId) {
+    let bookmarksArray = []
+    db.collection('bookmarks')
+      .where("userId", "==", userId)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          let bookmark = doc.data()
+          bookmark.docId = bookmark.id
+          bookmark.createdAt = bookmark.createdAt.toDate()
+          bookmark.updatedAt = bookmark.updatedAt.toDate()
+          bookmark.createdAtString = date2string(bookmark.createdAt)
+          bookmarksArray.push(bookmark)
+        })
+    })
+    commit('setBookmarks', bookmarksArray)
+  },
   async getTags({ commit }, userId) {
     let tagsArray = []
     db.collection('users')
@@ -98,6 +116,9 @@ const mutations = {
   },
   setUid(state, payload) {
     state.uid = payload
+  },
+  setBookmarks(state, payload) {
+    state.bookmarks = payload
   },
   setTags(state, payload) {
     state.tags = payload
