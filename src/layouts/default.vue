@@ -1,8 +1,21 @@
 <template>
   <div>
-    <nuxt />
+    <div class="main">
+      <nuxt />
+    </div>
+    <Footer />
   </div>
 </template>
+
+<script lang="ts">
+import Vue from 'vue'
+import Footer from '@/components/parts/Footer.vue'
+export default Vue.extend({
+  components: {
+    Footer
+  }
+})
+</script>
 
 <style>
 html {
@@ -15,6 +28,10 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+}
+
+.main {
+  margin: 0 10px 70px 10px;
 }
 
 *,
