@@ -6,6 +6,7 @@
       label="URL"
       placeholder="www.google.com"
     />
+    <span v-if="flashMessage" class="flashMessage">{{ flashMessage }}</span>
     <TagsSelecter
       ref="tags"
     />
@@ -35,12 +36,21 @@ import TextField from '@/components/input/TextField.vue'
 import TextArea from '@/components/input/TextArea.vue'
 import TagsSelecter from '@/components/parts/TagsSelecter.vue'
 
+export type LocalState = {
+  flashMessage: string
+}
+
 export default Vue.extend({
   components: {
     Button,
     TextField,
     TextArea,
     TagsSelecter
+  },
+  data() {
+    return {
+      flashMessage: ''
+    }
   },
   computed: {
     userId() {
@@ -57,6 +67,15 @@ export default Vue.extend({
       const note: string = noteRef.get()
       const ratingRef: any = this.$refs.rating
       const rating: number = Number(ratingRef.get())
+      if (!url) {
+        this.flashMessage = 'URLを入力してください'
+        return
+      }
+      const urlRegex = /https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+/g
+      if (!url.match(urlRegex)) {
+        this.flashMessage = 'URLではないものが入力されています'
+        return
+      }
       const bookmark: CreateBookmarkDto = {
         userId: this.userId,
         createdAt: serverTimestamp,
@@ -84,4 +103,10 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+.flashMessage {
+  display: flex;
+  text-align: left;
+  color: #FF6666;
+  margin-bottom: 4px;
+}
 </style>
