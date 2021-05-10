@@ -6,6 +6,7 @@
       label="タグ"
       placeholder="デザイン"
     />
+    <span v-if="flashMessage" class="flashMessage">{{ flashMessage }}</span>
     <Button @onClick="addTag" label="タグを追加" />
   </div>
 </template>
@@ -18,15 +19,40 @@ import { CreateTagDto } from '@/types/Tag'
 import Button from '@/components/parts/Button.vue'
 import TextField from '@/components/input/TextField.vue'
 
+export type LocalState = {
+  flashMessage: string
+}
+
 export default Vue.extend({
   components: {
     Button,
     TextField
   },
+  data() {
+    return {
+      flashMessage: ''
+    }
+  },
+  computed: {
+    userId() {
+      return this.$store.state.uid
+    },
+    tags() {
+      return this.$store.state.tags
+    }
+  },
   methods: {
     addTag() {
       const tagLabelRef: any = this.$refs.tagLabel
       const label: string = tagLabelRef.get()
+      if (!label) {
+        this.flashMessage = 'タグを入力してください'
+        return
+      }
+      if (this.tags.includes(label)) {
+        this.flashMessage = 'すでに追加済みのタグです'
+        return
+      }
       const tag: CreateTagDto = {
         label,
         createdAt: serverTimestamp,
@@ -36,9 +62,12 @@ export default Vue.extend({
       const db = firebase.firestore()
       try {
         db.collection('users')
-          .doc('andmohiko')
+          .doc(this.userId)
           .collection('tags')
           .add(tag)
+        let tags = this.tags.slice()
+        tags.push(label)
+        this.$store.commit('setTags', tags)
       } catch (error) {
         console.log('error in adding tag', error)
       }
@@ -48,4 +77,10 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+.flashMessage {
+  display: flex;
+  text-align: left;
+  color: #FF6666;
+  margin-bottom: 4px;
+}
 </style>
