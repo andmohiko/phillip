@@ -29,6 +29,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/css/reset.css',
   ],
   /*
   ** Plugins to load before mounting the App
@@ -49,7 +50,13 @@ export default {
   */
   modules: [
     '@nuxtjs/pwa',
+    '@nuxtjs/style-resources'
   ],
+
+  styleResources: {
+    scss: ['@/assets/scss/main.scss']
+  },
+
   /*
   ** Build configuration
   */
