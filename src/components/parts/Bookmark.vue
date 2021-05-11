@@ -1,10 +1,16 @@
 <template>
-  <div class="bookmark">
-    <span>
-      <a :href="bookmark.url" target="_blank" rel="noopener noreferrer">
+  <div class="bookmark shadow-lg rounded-lg">
+    <div class="bookmark-header">
+      <a
+        :href="bookmark.url"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bookmark-link"
+      >
         {{ bookmark.url }}
       </a>
-    </span>
+      <p class="bookmark-date">{{ bookmark.createdAtString.slice(0,10) }}</p>
+    </div>
     <div class="tags">
       <Tag
         v-for="tag in bookmark.tags"
@@ -13,8 +19,8 @@
       />
     </div>
     <p
-      style="white-space:pre-wrap; word-wrap:break-word;"
       v-text="bookmark.note"
+      class="bookmark-note"
     />
   </div>
 </template>
@@ -40,25 +46,38 @@ export default Vue.extend({
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  margin-bottom: 24px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+  width: 100%;
+  padding: 16px;
+  background-color: $white;
+  border: 1px solid #EEEEFF;
+  line-height: 20px;
+  &-header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  &-link {
+    word-break: break-all;
+    text-align: left;
+  }
+  &-date {
+    color: $text-gray;
+    margin-left: 8px;
+  }
+  &-note {
+    text-align: left;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 16px;
+    line-height: 24px;
+    color: $text-black;
+  }
 }
 .tags {
   display: flex;
-}
-.tag {
-  display: inline-block;
-  border: 2px solid #AAAAFF;
-  padding: 4px 12px;
-  margin: 4px;
-  border-radius: 50px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #888888;
-  text-align: center;
-}
-.tagSelected {
-  color: #FFFFFF;
-  background: #AAAAFF;
+  flex-wrap: wrap;
+  margin: 8px 0;
 }
 </style>
