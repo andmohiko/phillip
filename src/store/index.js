@@ -30,7 +30,6 @@ const actions = {
   async checkLogin ({ commit, dispatch }) {
     await firebase.auth().onAuthStateChanged(user => {
       if (!user) return
-      console.log(user)
       commit('setUid', user.uid)
       dispatch('isUser', user)
     })
@@ -94,6 +93,7 @@ const actions = {
     db.collection('users')
       .doc(userId)
       .collection('tags')
+      .orderBy('label')
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
