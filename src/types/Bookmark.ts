@@ -8,6 +8,7 @@ export interface Bookmark {
   userId: UserId
   createdAt: Date
   updatedAt: Date
+  createdAtString: string
   url: Url
   tags: Label[]
   note: string
