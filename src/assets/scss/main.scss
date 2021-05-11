@@ -1,6 +1,7 @@
+// variables
 $text-black: #4a5568d9;
 $text-white: #ffffff;
-$link: #8777de;
+$link: #667ea3;
 // Theme
 $primary: #579aff;
 $black: #4a5568d9;
@@ -8,3 +9,7 @@ $white: #ffffff;
 // $primary-dark: #9065ba; // secondary
 // $primary-light: #f5edfc;
 // $yellow: #f4f471;
+
+a {
+  color: $link;
+}
