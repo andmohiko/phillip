@@ -70,7 +70,7 @@ export default {
   width: 100%;
   padding: 0 30px;
   border-top: solid 1px #4a55683a;
-  background-color: white;
+  background-color: $white;
   position: fixed;
   bottom: 0;
   display: flex;

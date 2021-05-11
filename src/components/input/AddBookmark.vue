@@ -1,5 +1,5 @@
 <template>
-  <div class="add-bookmark pb-6">
+  <div class="add-bookmark pt-2 pb-6">
     <p class="text-xl text-gray-700 pb-2">新しくリンクを保存</p>
     <TextField
       ref="url"

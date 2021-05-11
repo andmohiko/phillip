@@ -1,5 +1,5 @@
 <template>
-  <div class="tags-selecter pb-6">
+  <div class="tags-selecter pt-2 pb-6">
     <p class="text-gray-700 text-left">タグ一覧</p>
     <div>
       <Tag
