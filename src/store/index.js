@@ -1,6 +1,7 @@
 import firebase from '@/plugins/firebase'
 import { serverTimestamp } from '@/plugins/firebase'
 import { date2string } from '@/utils/date.js'
+import createPersistedState from "vuex-persistedstate"
 
 const db = firebase.firestore()
 // import "firebase/auth"
@@ -136,7 +137,7 @@ const store = () => {
     state,
     mutations,
     actions,
-    // plugins: [createPersistedState()]
+    plugins: [createPersistedState()]
   })
 }
 
