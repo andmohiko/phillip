@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <h1 class="text-2xl text-gray-700 pb-4">ブクマ一覧</h1>
-    <Bookmark
+    <h1 class="text-2xl text-gray-700 py-4">ブクマ一覧</h1>
+    <BookmarkCard
       v-for="bookmark in bookmarks"
       :key="bookmark.id"
       :bookmark="bookmark"
@@ -11,13 +11,14 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import { Bookmark } from '@/types/Bookmark'
 import Button from '@/components/parts/Button.vue'
-import Bookmark from '@/components/parts/Bookmark.vue'
+import BookmarkCard from '@/components/parts/BookmarkCard.vue'
 
 export default Vue.extend({
   components: {
     Button,
-    Bookmark
+    BookmarkCard
   },
   async asyncData({ store }) {
     store.dispatch('getBookmarks', store.state.uid)
@@ -28,12 +29,8 @@ export default Vue.extend({
     },
     bookmarks() {
       return this.$store.state.bookmarks
+        .sort((a: Bookmark, b: Bookmark) => (a.createdAt > b.createdAt ? -1 : 1))
     }
-  },
-  methods: {
-    login() {
-      this.$store.dispatch("loginGoogle")
-    },
   }
 })
 </script>

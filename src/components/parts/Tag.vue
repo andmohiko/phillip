@@ -29,8 +29,8 @@ export default Vue.extend({
 .tag {
   display: inline-block;
   border: 2px solid #AAAAFF;
-  padding: 4px 12px;
-  margin: 4px;
+  padding: 2px 10px;
+  margin: 4px 4px 4px 0;
   border-radius: 50px;
   font-size: 16px;
   font-weight: bold;
