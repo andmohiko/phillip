@@ -1,7 +1,7 @@
 <template>
   <button
     :style="widthStyle"
-    class="uppercase rounded-full max-w-max shadow-sm hover:shadow-md button"
+    class="button max-w-max shadow-sm hover:shadow-md"
     @click="$emit('onClick')"
   >
     {{ label }}
@@ -36,6 +36,7 @@ export default Vue.extend({
   margin: 0 auto;
   display: block;
   border: solid 1px $primary;
+  border-radius: 8px;
   color: $primary;
   padding: 15px 0;
   font-weight: bold;
