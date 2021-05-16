@@ -1,12 +1,12 @@
 <template>
-  <div class="flex flex-col mb-4 items-start">
+  <div class="textfield mb-4 items-start">
     <label
       v-show="isLabelShow"
       class="text-gray-700 text-left"
       >{{ label }}
     </label>
     <div
-      class="pt-2 flex items-center"
+      class="textfield-input pt-2 items-center"
       :style="[widthStyle]"
     >
       <span v-if="prefix" class="text-lg text-gray-700 pr-1">{{ prefix }}</span>
@@ -90,4 +90,14 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+.textfield {
+  display: flex;
+  flex-direction: column;
+  &-input {
+    display: flex;
+    input {
+      border-radius: 8px;
+    }
+  }
+}
 </style>
