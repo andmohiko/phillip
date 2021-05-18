@@ -68,9 +68,15 @@ export default Vue.extend({
         let tags = this.tags.slice()
         tags.push(label)
         this.$store.commit('setTags', tags)
+        this.clearInputs()
+        this.flashMessage = 'タグを追加しました'
       } catch (error) {
         console.log('error in adding tag', error)
       }
+    },
+    clearInputs() {
+      const tagLabelRef: any = this.$refs.tagLabel
+      tagLabelRef.clearField()
     }
   }
 })

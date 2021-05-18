@@ -6,7 +6,7 @@
       label="URL"
       placeholder="www.google.com"
     />
-    <span v-if="flashMessage" class="flashMessage">{{ flashMessage }}</span>
+    <span v-if="flashErrorMessage" class="flashErrorMessage">{{ flashErrorMessage }}</span>
     <TagsSelecter
       ref="tags"
     />
@@ -21,7 +21,10 @@
       placeholder="3"
       width="120px"
     />
-    <Button @onClick="addBookmark" label="リンクを保存" />
+    <div class="submit">
+      <span v-if="flashSuccessMessage" class="flashSuccessMessage">{{ flashSuccessMessage }}</span>
+      <Button @onClick="addBookmark" label="リンクを保存" />
+    </div>
   </div>
 </template>
 
@@ -37,7 +40,8 @@ import TextArea from '@/components/input/TextArea.vue'
 import TagsSelecter from '@/components/parts/TagsSelecter.vue'
 
 export type LocalState = {
-  flashMessage: string
+  flashErrorMessage: string,
+  flashSuccessMessage: string
 }
 
 export default Vue.extend({
@@ -49,7 +53,8 @@ export default Vue.extend({
   },
   data() {
     return {
-      flashMessage: ''
+      flashErrorMessage: '',
+      flashSuccessMessage: ''
     }
   },
   computed: {
@@ -68,12 +73,14 @@ export default Vue.extend({
       const ratingRef: any = this.$refs.rating
       const rating: number = Number(ratingRef.get())
       if (!url) {
-        this.flashMessage = 'URLを入力してください'
+        this.flashErrorMessage = 'URLを入力してください'
+        this.flashSuccessMessage = ''
         return
       }
       const urlRegex = /https?:\/\/[-_.!~*\'()a-zA-Z0-9;\/?:\@&=+\$,%#]+/g
       if (!url.match(urlRegex)) {
-        this.flashMessage = 'URLではないものが入力されています'
+        this.flashErrorMessage = 'URLではないものが入力されています'
+        this.flashSuccessMessage = ''
         return
       }
       const bookmark: CreateBookmarkDto = {
@@ -94,19 +101,44 @@ export default Vue.extend({
         db.collection('bookmarks')
           .doc()
           .set(bookmark)
+        this.clearInputs()
+        this.flashErrorMessage = ''
+        this.flashSuccessMessage = 'URLを保存しました'
       } catch (error) {
         console.log('error in adding bookmark', error)
       }
+    },
+    clearInputs() {
+      const urlRef: any = this.$refs.url
+      urlRef.clearField()
+      const tagsRef: any = this.$refs.tags
+      tagsRef.clearSelected()
+      const noteRef: any = this.$refs.note
+      noteRef.clearField()
+      const ratingRef: any = this.$refs.rating
+      ratingRef.clearField()
+      urlRef.clearField()
     }
   }
 })
 </script>
 
 <style scoped lang="scss">
-.flashMessage {
+.flashErrorMessage {
   display: flex;
   text-align: left;
   color: #FF6666;
   margin-bottom: 4px;
+}
+.submit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.flashSuccessMessage {
+  display: flex;
+  color: #FF6666;
+  margin-bottom: 8px;
 }
 </style>
