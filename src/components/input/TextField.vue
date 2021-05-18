@@ -83,7 +83,7 @@ export default Vue.extend({
   methods: {
     get(): string | null {
       if (!this.isValid) return null
-      return this.input
+      return this.input.trim()
     }
   }
 })
