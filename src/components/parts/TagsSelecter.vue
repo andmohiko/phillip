@@ -1,6 +1,6 @@
 <template>
   <div class="tags-selecter pt-2 pb-6">
-    <p class="text-gray-700 text-left">タグ一覧</p>
+    <p class="text-gray-700 text-left pb-1">タグ一覧</p>
     <div>
       <Tag
         v-for="(tag, i) in tags"
