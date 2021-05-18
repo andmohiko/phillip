@@ -4,7 +4,6 @@
     <div class="goole-login">
       <Button @onClick="login" label="googleでログイン" />
     </div>
-    {{ userId }}
     <TagsSelecter />
   </div>
 </template>
