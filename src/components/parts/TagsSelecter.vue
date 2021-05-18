@@ -50,6 +50,9 @@ export default Vue.extend({
     },
     get(): Label[] {
       return this.tags.filter((tag: Label, i: number) => this.isSelectedArray[i])
+    },
+    clearSelected() {
+      this.isSelectedArray = new Array(this.tags.length).fill(false);
     }
   }
 })

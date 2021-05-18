@@ -84,6 +84,9 @@ export default Vue.extend({
     get(): string | null {
       if (!this.isValid) return null
       return this.input.trim()
+    },
+    clearField(): void {
+      this.input = ''
     }
   }
 })
