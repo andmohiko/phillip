@@ -1,7 +1,10 @@
 <template>
-  <div class="tags-selecter pt-2 pb-6">
+  <div class="pt-2 pb-6">
     <p class="text-gray-700 text-left pb-1">タグ一覧</p>
-    <div>
+    <div
+      :class="{ isPopup: isScroll }"
+      class="tags-selecter isScroll"
+    >
       <Tag
         v-for="(tag, i) in tags"
         :key="tag.id"
@@ -23,6 +26,12 @@ export type LocalState = {
 }
 
 export default Vue.extend({
+  props: {
+    isPopup: {
+      default: false,
+      type: Boolean
+    }
+  },
   components: {
     Tag
   },
@@ -59,6 +68,9 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+.tags-selecter {
+  border: 1px solid $gray-light;
+}
 .tag {
   border: 2px solid #AAAAFF;
   padding: 4px 12px;
@@ -72,5 +84,9 @@ export default Vue.extend({
 .tagSelected {
   color: #FFFFFF;
   background: #AAAAFF;
+}
+.isScroll {
+  height: 100px;
+  overflow: scroll;
 }
 </style>
