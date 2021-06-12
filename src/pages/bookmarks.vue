@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <h1 class="text-2xl text-gray-700 py-4">ブクマ一覧</h1>
+    <TagsSelecter ref="tags" @updateSelect="updateSelect" />
     <BookmarkCard
       v-for="bookmark in bookmarks"
       :key="bookmark.id"
@@ -11,14 +12,27 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import _ from 'lodash'
 import { Bookmark } from '@/types/Bookmark'
+import { Label } from '@/types/Tag'
 import Button from '@/components/parts/Button.vue'
 import BookmarkCard from '@/components/parts/BookmarkCard.vue'
+import TagsSelecter from '@/components/parts/TagsSelecter.vue'
+
+export type LocalState = {
+  selectedTags: Label[]
+}
 
 export default Vue.extend({
   components: {
     Button,
-    BookmarkCard
+    BookmarkCard,
+    TagsSelecter
+  },
+  data(): LocalState {
+    return {
+      selectedTags: []
+    }
   },
   async asyncData({ store }) {
     store.dispatch('getBookmarks', store.state.uid)
@@ -27,9 +41,26 @@ export default Vue.extend({
     userId() {
       return this.$store.state.uid
     },
-    bookmarks() {
-      return this.$store.state.bookmarks
-        .sort((a: Bookmark, b: Bookmark) => (a.createdAt > b.createdAt ? -1 : 1))
+    bookmarks(): Bookmark[] {
+      const bookmarks = _.cloneDeep(
+        this.$store.state.bookmarks
+          .sort((a: Bookmark, b: Bookmark) => (a.createdAt > b.createdAt ? -1 : 1))
+      )
+      if (!this.selectedTags.length) {
+        return bookmarks
+      }
+      return bookmarks.filter((b: Bookmark) => this.hasSelectedTag(b))
+    }
+  },
+  methods: {
+    hasSelectedTag(bookmark: Bookmark): boolean {
+      return Boolean(
+        bookmark.tags.filter(t => this.selectedTags.includes(t)).length
+      )
+    },
+    updateSelect() {
+      const tagsRef: any = this.$refs.tags
+      this.selectedTags = tagsRef.get().sort()
     }
   }
 })
