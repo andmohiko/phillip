@@ -26,7 +26,8 @@
     "typeRoots": ["/src/types"],
     "types": [
       "@types/node",
-      "@nuxt/types"
+      "@nuxt/types",
+      "@types/lodash"
     ]
   },
   "exclude": [
