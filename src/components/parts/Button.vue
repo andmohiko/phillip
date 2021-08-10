@@ -31,7 +31,7 @@ export default Vue.extend({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .button {
   margin: 0 auto;
   display: block;
