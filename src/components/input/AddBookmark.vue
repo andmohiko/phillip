@@ -15,12 +15,12 @@
       label="メモ"
       placeholder="ここが役に立った"
     />
-    <TextField
-      ref="rating"
-      label="評価"
-      placeholder="3"
-      width="120px"
-    />
+    <div class="rating">
+      <span class="text-base text-gray-700 pb-3">評価</span>
+      <RatingSelecter
+        ref="rating"
+      />
+    </div>
     <div class="submit">
       <span v-if="flashSuccessMessage" class="flashSuccessMessage">{{ flashSuccessMessage }}</span>
       <Button @onClick="addBookmark" label="リンクを保存" />
@@ -35,6 +35,7 @@ import { serverTimestamp } from '@/plugins/firebase'
 import { CreateBookmarkDto } from '@/types/Bookmark'
 import { Label } from '@/types/Tag'
 import Button from '@/components/parts/Button.vue'
+import RatingSelecter from '@/components/input/RatingSelecter.vue'
 import TextField from '@/components/input/TextField.vue'
 import TextArea from '@/components/input/TextArea.vue'
 import TagsSelecter from '@/components/parts/TagsSelecter.vue'
@@ -47,6 +48,7 @@ export type LocalState = {
 export default Vue.extend({
   components: {
     Button,
+    RatingSelecter,
     TextField,
     TextArea,
     TagsSelecter
@@ -117,24 +119,28 @@ export default Vue.extend({
       noteRef.clearField()
       const ratingRef: any = this.$refs.rating
       ratingRef.clearField()
-      urlRef.clearField()
     }
   }
 })
 </script>
 
 <style scoped lang="scss">
-.flashErrorMessage {
+.rating {
   display: flex;
+  flex-direction: column;
   text-align: left;
-  color: #FF6666;
-  margin-bottom: 4px;
 }
 .submit {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.flashErrorMessage {
+  display: flex;
+  text-align: left;
+  color: #FF6666;
+  margin-bottom: 4px;
 }
 .flashSuccessMessage {
   display: flex;
