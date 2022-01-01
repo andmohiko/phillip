@@ -1,13 +1,19 @@
 <template>
-  <div class="add-tag pb-6">
-    <p class="text-xl text-gray-700 pb-2">新しくタグを追加</p>
+  <div class="flex flex-col overflow-auto">
+    <div class="modal-header">
+      <h2 class="text-xl py-2 border-b">新しくタグを追加</h2>
+    </div>
     <TextField
       ref="tagLabel"
       label="タグ"
       placeholder="デザイン"
     />
     <span v-if="flashMessage" class="flashMessage">{{ flashMessage }}</span>
-    <Button @onClick="addTag" label="タグを追加" />
+    <div class="modal-footer border-t pt-2">
+      <div class="submit">
+        <Button @onClick="submit" label="登録する" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -16,8 +22,9 @@ import Vue from 'vue'
 import firebase from '@/plugins/firebase'
 import { serverTimestamp } from '@/plugins/firebase'
 import { CreateTagDto } from '@/types/Tag'
-import Button from '@/components/parts/Button.vue'
+
 import TextField from '@/components/input/TextField.vue'
+import Button from '@/components/parts/Button.vue'
 
 export type LocalState = {
   flashMessage: string
@@ -26,9 +33,9 @@ export type LocalState = {
 export default Vue.extend({
   components: {
     Button,
-    TextField
+    TextField,
   },
-  data() {
+  data(): LocalState {
     return {
       flashMessage: ''
     }
@@ -42,7 +49,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    addTag() {
+    submit() {
       const tagLabelRef: any = this.$refs.tagLabel
       const label: string = tagLabelRef.get()
       if (!label) {
@@ -68,15 +75,13 @@ export default Vue.extend({
         let tags = this.tags.slice()
         tags.push(label)
         this.$store.commit('setTags', tags)
-        this.clearInputs()
-        this.flashMessage = 'タグを追加しました'
+        this.onClose()
       } catch (error) {
         console.log('error in adding tag', error)
       }
     },
-    clearInputs() {
-      const tagLabelRef: any = this.$refs.tagLabel
-      tagLabelRef.clearField()
+    onClose() {
+      this.$emit('close')
     }
   }
 })

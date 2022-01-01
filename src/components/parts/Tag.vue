@@ -28,17 +28,17 @@ export default Vue.extend({
 <style scoped lang="scss">
 .tag {
   display: inline-block;
-  border: 2px solid #AAAAFF;
+  border: 2px solid $primary-light;
   padding: 2px 10px;
   margin: 4px 4px 4px 0;
   border-radius: 50px;
   font-size: 16px;
   font-weight: bold;
-  color: #888888;
+  color: $primary-light;
   text-align: center;
 }
 .tagSelected {
   color: #FFFFFF;
-  background: #AAAAFF;
+  background: $primary-light;
 }
 </style>

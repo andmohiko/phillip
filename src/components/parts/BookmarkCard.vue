@@ -11,6 +11,12 @@
       </a>
       <p class="bookmark-date">{{ bookmark.createdAtString.slice(0,10) }}</p>
     </div>
+    <div class="rating">
+      <Rating
+        :rating="bookmark.rating"
+        size="16px"
+      />
+    </div>
     <div class="tags">
       <Tag
         v-for="tag in bookmark.tags"
@@ -27,10 +33,12 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import Rating from '@/components/parts/Rating.vue'
 import Tag from '@/components/parts/Tag.vue'
 
 export default Vue.extend({
   components: {
+    Rating,
     Tag
   },
   props: {
@@ -75,9 +83,12 @@ export default Vue.extend({
     color: $text-black;
   }
 }
+.rating {
+  margin-top: 8px;
+}
 .tags {
   display: flex;
   flex-wrap: wrap;
-  margin: 8px 0;
+  margin: 4px 0;
 }
 </style>

@@ -56,6 +56,7 @@ export default Vue.extend({
         }
         return flag
       })
+      this.$emit('updateSelect')
     },
     get(): Label[] {
       return this.tags.filter((tag: Label, i: number) => this.isSelectedArray[i])
