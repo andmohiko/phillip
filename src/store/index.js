@@ -73,7 +73,7 @@ const actions = {
   },
   async getBookmarks({ commit }, userId) {
     let bookmarksArray = []
-    db.collection('bookmarks')
+    await db.collection('bookmarks')
       .where("userId", "==", userId)
       .get()
       .then((querySnapshot) => {
@@ -90,7 +90,7 @@ const actions = {
   },
   async getTags({ commit }, userId) {
     let tagsArray = []
-    db.collection('users')
+    await db.collection('users')
       .doc(userId)
       .collection('tags')
       .orderBy('label')
