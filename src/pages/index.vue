@@ -42,9 +42,9 @@ export default Vue.extend({
       isShowAddModal: false
     }
   },
-  async asyncData({ store }) {
-    store.dispatch('getTags', store.state.uid)
-  },
+  // async fetch({ store }) {
+  //   store.dispatch('getTags', store.state.uid)
+  // },
   computed: {
     isLogin() {
       return this.$store.state.isLogin

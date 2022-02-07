@@ -36,6 +36,7 @@ export default {
   */
   plugins: [
     '~/plugins/firebase',
+    '~/plugins/setup'
   ],
   /*
   ** Nuxt.js dev-modules
